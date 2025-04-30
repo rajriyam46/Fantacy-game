@@ -1,134 +1,127 @@
-import { useState, useEffect } from "react";
-
-const fullList = [
-  // --- Strip Dares ---
- "Remove a piece using only one hand",
-  "Remove a piece while dancing to a song",
-  "Let your partner remove one item with their mouth",
-  "Pretend it’s your first time undressing for your partner",
-  "Do a slow countdown before removing a piece",
-  "Make eye contact and remove your shirt slowly",
-  "Remove a piece while turning around seductively",
-  "Take off clothing in the style of a movie scene",
-  "Remove something and toss it to your partner",
-  "Let your partner choose what you take off",
-  "Do a spin while removing a layer",
-  "Remove an item and describe your favorite memory while wearing it",
-  "Remove a piece in slow motion while narrating like a sportscaster",
-  "Pretend you're modeling and remove one item on a catwalk",
-  "Remove something while blindfolded",
-  "Let your partner untie or unzip one piece",
-  "Take off clothing while holding your breath",
-  "Use a countdown (3...2...1) before revealing the removed item",
-  "Take off one item with eyes closed and guess what’s left",
-  "Remove something while pretending to be a shy first-timer"
-
-  // --- Foreplay Dares ---
-  "Kiss passionately for 30 seconds",
-  "Lick neck slowly",
-  "Give a sensual massage for 1 minute",
-  "Nibble their ear gently",
-  "Perform a slow striptease",
-  "Give a lap dance",
-  "Whisper your favorite fantasy",
-  "Caress chest area for 1 minute",
-  "Lick navel in circles",
-  "Rub partner’s thighs slowly",
-  "Kiss inner thighs",
-  "Touch and tease but don’t go all the way",
-  "Blow softly near their private parts",
-  "Try a 69 position (for a few seconds if new)",
-  "Give a blowjob",
-  "Give a hand job",
-  "Let partner rub your penis slowly",
-  "Rub her clit gently",
-  "Kiss nipples gently",
-  "Blindfold and kiss everywhere",
-  "Suck on fingers suggestively",
-  "Do a sexy countdown before touching",
-  "Use only tongue for 1 minute",
-  "Do a slow grind for 30 seconds",
-
-  // --- Mutual Intimacy ---
-  "Look into each other's eyes for 30 seconds",
-  "Share one deepest desire",
-  "Try missionary position",
-  "Try spooning position",
-  "Try cowgirl position",
-  "Do soft kisses all over body",
-  "Let partner take complete control",
-  "Both get fully undressed together",
-  "Hug without saying a word for 1 minute",
-  "Explore each other’s bodies with fingertips",
-  "Touch each other without kissing for 2 minutes",
-  "Lie on top and feel heartbeats",
-  "Moan each other’s name softly",
-  "Roleplay silently with actions",
-  "Give 3 compliments before proceeding",
-  "Ask 'Can I continue?' playfully",
-  "Sync your breath together",
-  "Guide your partner’s hands",
-];
-
-export default function Home() {
-  const [shuffled, setShuffled] = useState([]);
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const newList = [...fullList];
-    for (let i = newList.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newList[i], newList[j]] = [newList[j], newList[i]];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fantasy Dare Game 💋</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #fff0f5;
+      padding: 40px;
     }
-    setShuffled(newList);
-    setIndex(0);
-  }, []);
-
-  const nextAction = () => {
-    if (index < shuffled.length - 1) {
-      setIndex(index + 1);
+    h1 {
+      color: #d63384;
     }
-  };
-
-  const reset = () => {
-    const reshuffled = [...fullList];
-    for (let i = reshuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [reshuffled[i], reshuffled[j]] = [reshuffled[j], reshuffled[i]];
+    #dare {
+      font-size: 1.5rem;
+      margin: 40px 0;
+      color: #333;
+      min-height: 100px;
     }
-    setShuffled(reshuffled);
-    setIndex(0);
-  };
+    button {
+      padding: 12px 24px;
+      margin: 0 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      background-color: #ff69b4;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fantasy Dare Game 💋</h1>
+  <div id="dare">Click "Start" to begin</div>
+  <button onclick="nextDare()">➡️ Next</button>
+  <button onclick="restart()">🔁 Restart</button>
 
-  return (
-    <div style={{ fontFamily: "sans-serif", textAlign: "center", padding: "2rem" }}>
-      <h1>Fantasy Dare Game 💋</h1>
-      <div style={{
-        border: "2px solid #f06",
-        borderRadius: "10px",
-        padding: "2rem",
-        margin: "2rem auto",
-        maxWidth: "500px",
-        backgroundColor: "#fff0f5",
-        fontSize: "1.5rem"
-      }}>
-        {shuffled[index]}
-      </div>
-      <div style={{ marginTop: "1rem" }}>
-        <button onClick={nextAction} style={btnStyle}>Next ➡️</button>
-        <button onClick={reset} style={btnStyle}>🔁 Restart</button>
-      </div>
-    </div>
-  );
-}
+  <script>
+    const allDares = [
+      // --- Strip Dares ---
+      "Remove a piece using only one hand",
+      "Remove a piece while dancing to a song",
+      "Let your partner remove one item with their mouth",
+      "Pretend it’s your first time undressing for your partner",
+      "Do a slow countdown before removing a piece",
+      "Make eye contact and remove your shirt slowly",
+      "Remove a piece while turning around seductively",
+      "Take off clothing in the style of a movie scene",
+      "Remove something and toss it to your partner",
+      "Let your partner choose what you take off",
+      "Do a spin while removing a layer",
+      "Remove something while blindfolded",
+      "Say one compliment before taking something off",
+      "Remove something while doing a silly dance",
+      "Let your partner untie or unzip one piece",
+      "Act surprised as if it’s the first time",
+      "Whisper something naughty while undressing",
 
-const btnStyle = {
-  padding: "10px 20px",
-  margin: "0 10px",
-  fontSize: "1rem",
-  borderRadius: "8px",
-  border: "none",
-  background: "#ff69b4",
-  color: "#fff",
-  cursor: "pointer"
-};
+      // --- Foreplay Dares ---
+      "Kiss passionately for 30 seconds",
+      "Lick their neck slowly",
+      "Give a sensual massage for 1 minute",
+      "Nibble their ear gently",
+      "Perform a slow striptease",
+      "Give a lap dance",
+      "Whisper your favorite fantasy",
+      "Caress their chest area for 1 minute",
+      "Kiss their inner thighs",
+      "Tease their body without touching privates",
+      "Blow softly near their private parts",
+      "Use only tongue for 1 minute",
+      "Suck on fingers suggestively",
+      "Blindfold and kiss everywhere",
+      "Do a slow grind for 30 seconds",
+
+      // --- Mutual Intimacy / Positions ---
+      "Look into each other's eyes for 30 seconds",
+      "Share your deepest desire",
+      "Try missionary position",
+      "Try spooning position",
+      "Try cowgirl position",
+      "Let your partner take full control",
+      "Explore each other’s bodies with fingertips",
+      "Touch each other without kissing for 2 minutes",
+      "Guide your partner’s hands",
+      "Sync your breath together",
+      "Moan each other’s name softly",
+      "Lie on top and feel heartbeats",
+      "Give 3 compliments before proceeding",
+      "Ask 'Can I continue?' playfully"
+    ];
+
+    let shuffled = [];
+    let currentIndex = 0;
+
+    function shuffleList(list) {
+      const newList = [...list];
+      for (let i = newList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newList[i], newList[j]] = [newList[j], newList[i]];
+      }
+      return newList;
+    }
+
+    function nextDare() {
+      if (currentIndex >= shuffled.length) {
+        document.getElementById("dare").innerText = "All dares complete! 🔁 Restart to play again.";
+        return;
+      }
+      document.getElementById("dare").innerText = shuffled[currentIndex];
+      currentIndex++;
+    }
+
+    function restart() {
+      shuffled = shuffleList(allDares);
+      currentIndex = 0;
+      nextDare();
+    }
+
+    // Initial shuffle
+    shuffled = shuffleList(allDares);
+  </script>
+</body>
+</html>
