@@ -5,56 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fantasy Dare Game 💋</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #fff0f5;
-      padding: 40px;
-      margin: 0;
-    }
-    h1 {
-      color: #d63384;
-      margin-bottom: 20px;
-    }
-    .btn {
-      padding: 12px 20px;
-      margin: 5px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      background-color: #888; /* default grey */
-    }
-    .btn.phase { background-color: #ff69b4; }
-    .btn.subcat { background-color: #666; }
-    .btn.subcat.active.him { background-color: #3399ff; }   /* blue */
-    .btn.subcat.active.her { background-color: #ff3399; }   /* pink */
-    .btn.control { background-color: #d63384; }
-    .btn:hover { opacity: 0.9; }
-    #dare {
-      font-size: 1.3rem;
-      margin: 40px 0;
-      min-height: 80px;
-      color: #333;
-    }
-    #controls {
-      margin-top: 20px;
-    }
+    body { font-family: Arial, sans-serif; background: #fff0f5; text-align: center; margin:0; padding:40px; }
+    h1 { color: #d63384; margin-bottom:20px; }
+    .btn { padding:10px 16px; margin:5px; border:none; border-radius:6px; cursor:pointer; color:#fff; }
+    .btn.phase { background:#ff69b4; }
+    .btn.subcat { background:#666; }
+    .btn.subcat.active.him { background:#3399ff; }
+    .btn.subcat.active.her { background:#ff3399; }
+    .btn.control { background:#d63384; }
+    #dare { font-size:1.3rem; margin:40px 0; min-height:80px; color:#333; }
+    #controls { margin-top:20px; display:none; }
   </style>
 </head>
 <body>
   <h1>Fantasy Dare Game 💋</h1>
 
-  <!-- Phase selection -->
+  <!-- Phase buttons -->
   <div id="phases">
     <button class="btn phase" onclick="selectPhase('strip')">Striptease</button>
     <button class="btn phase" onclick="selectPhase('foreplay')">Foreplay</button>
-    <button class="btn phase" onclick="selectPhase('intimacy')">Intimacy</button>
+    <button class="btn phase" onclick="selectPhase('mutual')">Mutual</button>
   </div>
 
-  <!-- Sub-category always visible -->
-  <div id="subcats">
+  <!-- Always-visible subcat -->
+  <div id="subcats" style="margin-top:20px;">
     <button id="btn-him" class="btn subcat" onclick="selectSubcat('him')">For Him</button>
     <button id="btn-her" class="btn subcat" onclick="selectSubcat('her')">For Her</button>
   </div>
@@ -62,108 +36,205 @@
   <!-- Dare display -->
   <div id="dare">Choose a phase and who’s up to begin</div>
 
-  <!-- Next / Restart controls -->
-  <div id="controls" style="display:none;">
+  <!-- Next / Restart -->
+  <div id="controls">
     <button class="btn control" onclick="nextDare()">➡️ Next</button>
     <button class="btn control" onclick="restart()">🔁 Restart</button>
   </div>
 
   <script>
-    // Data
     const dares = {
       strip: {
-        him: [ /* ... your 20+ strip-him dares ... */ ],
-        her: [ /* ... your 20+ strip-her dares ... */ ]
+        him: [
+          "Remove a piece using only one hand",
+          "Remove a piece while dancing to a song",
+          "Let her remove one item with her mouth",
+          "Pretend it’s your first time undressing for her",
+          "Do a slow countdown before removing a piece",
+          "Make eye contact and remove your shirt slowly",
+          "Remove a piece while turning around seductively",
+          "Take off clothing in a movie-scene style",
+          "Toss each removed item theatrically",
+          "Spin while removing a layer",
+          "Remove something blindfolded",
+          "Say one compliment before each removal",
+          "Dance silly while stripping",
+          "Let her untie or unzip one piece",
+          "Act surprised as if first time",
+          "Whisper naughty secrets while undressing",
+          "Tell a truth before removing an item",
+          "Remove while holding your breath",
+          "Count down 3...2...1 then remove",
+          "Remove an item eyes-closed then guess it"
+        ],
+        her: [
+          "Remove a piece using only one hand",
+          "Dance while stripping a layer",
+          "Use your mouth to remove one item",
+          "Act shy as you remove something",
+          "Count down slowly before each removal",
+          "Keep eye contact while removing your bra",
+          "Remove a layer turning around seductively",
+          "Playfully toss removed items",
+          "Spin and remove a layer",
+          "Strip blindfolded and laugh",
+          "Compliment him before each removal",
+          "Do a silly dance while undressing",
+          "Let him untie or unzip one piece",
+          "Reveal one secret while stripping",
+          "Whisper fantasies as you undress",
+          "Remove while holding your breath",
+          "Count down 3...2...1 then reveal",
+          "Strip with eyes closed and guess the piece",
+          "Show your favorite piece last",
+          "Model each removed item on a runway"
+        ]
       },
       foreplay: {
-        him: [ /* ... foreplay-him dares ... */ ],
-        her: [ /* ... foreplay-her dares ... */ ]
+        him: [
+          "Lick her slowly from neck to thighs",
+          "Hold her wrists above her head and tease her",
+          "Spread her legs and blow warm air between them",
+          "Eat her out until she can't take anymore",
+          "Pin her down and make her moan your name",
+          "Suck her nipples with alternating pressure",
+          "Slap her ass and then kiss it better",
+          "Undress her with your mouth",
+          "Tie her legs apart and taste her slowly",
+          "Use your tongue in circular motion on her clit",
+          "Edge her three times before letting her finish",
+          "Talk dirty while fingering her slowly",
+          "Lick honey or syrup off her breasts",
+          "Bite her inner thighs softly",
+          "Make her ride your tongue",
+          "Gently choke her while you kiss her hard",
+          "Slide your fingers inside her while whispering fantasies",
+          "Tell her exactly what you’re going to do before doing it",
+          "Tease her over her panties without removing them",
+          "Kiss her entire body except between her legs",
+          "Tie her ankles and make her ask before touching",
+          "Make her scream by using only your mouth",
+          "Pinch her nipples while stimulating her with your tongue",
+          "Slide your hand under her clothes in public (if safe/legal)",
+          "Force her to keep eye contact while pleasing her",
+          "Use a toy on her while you watch",
+          "Kiss and suck her toes slowly",
+          "Pull her hair while you go down on her",
+          "Kiss her while your hand plays between her legs",
+          "Hold her from behind and grind slowly into her"
+        ],
+        her: [
+          "Deep throat him slowly while holding eye contact",
+          "Ride him with slow, deep strokes",
+          "Tie him up and tease without letting him touch you",
+          "Kiss down his torso and stop just above his shaft",
+          "Lick the tip only — no more — for 1 minute",
+          "Suck his balls gently while stroking him",
+          "Sit on his face and let him go wild",
+          "Make him watch you strip slowly",
+          "Touch yourself in front of him and don’t let him join",
+          "Use only your mouth to make him come close — then stop",
+          "Moan his name in his ear while grinding",
+          "Drip candle wax (safely) onto his chest",
+          "Bite his neck hard while riding him",
+          "Kiss his shaft from base to tip",
+          "Use your bra/panties to tease him",
+          "Talk dirty in detail about your last fantasy",
+          "Run your tongue over his body like a snake",
+          "Tell him what to do — and punish him if he disobeys",
+          "Lick and bite his earlobe while stroking him",
+          "Stroke his shaft with your feet",
+          "Sit on his lap, no panties, and grind slowly",
+          "Kiss his inner thighs without touching his cock",
+          "Lick whipped cream off his shaft",
+          "Spit on it and rub it slowly with your hand",
+          "Play with him under the table during dinner",
+          "Send him a live video of you touching yourself",
+          "Wake him up with oral",
+          "Write your name on his chest with your tongue",
+          "Say the dirtiest thing you can imagine while riding",
+          "Let him come on your body wherever he chooses"
+        ]
       },
-      intimacy: {
-        him: [ /* ... intimacy-him dares ... */ ],
-        her: [ /* ... intimacy-her dares ... */ ]
+      mutual: {
+        him: [
+          "Do 69 for 5 minutes",
+          "Try missionary position for 1 minute",
+          "Try spooning position",
+          "Try cowgirl position while she leads",
+          "Sync your breath together",
+          "Moan her name softly",
+          "Guide her hips slowly",
+          "Hold her tight and grind",
+          "Change positions after 1 minute",
+          "Whisper what you love about her body",
+          "Try doggy style gently",
+          "Take turns leading movement",
+          "Keep eye contact while moving",
+          "Pause and kiss mid-motion",
+          "Tell her a sexy compliment"
+        ],
+        her: [
+          "Do 69 for 5 minutes",
+          "Try missionary position for 1 minute",
+          "Try spooning position",
+          "Try cowgirl position while you lead",
+          "Sync your breath together",
+          "Moan his name softly",
+          "Guide his hips slowly",
+          "Hold him tight and grind",
+          "Change positions after 1 minute",
+          "Whisper what you love about his body",
+          "Try him from behind gently",
+          "Take turns leading movement",
+          "Keep eye contact while moving",
+          "Pause and kiss mid-motion",
+          "Tell him a sexy compliment"
+        ]
       }
     };
 
-    // Example fill-in (copy your real lists here):
-    dares.strip.him = [
-      "Remove a piece using only one hand",
-      "Remove while dancing to a song",
-      /* etc... */
-    ];
-    dares.strip.her = [
-      "Remove a piece using only one hand",
-      "Remove while dancing to a song",
-      /* etc... */
-    ];
-    dares.foreplay.him = [
-      "Kiss passionately for 30 seconds",
-      "Lick her neck slowly",
-      /* etc... */
-    ];
-    dares.foreplay.her = [
-      "Kiss him passionately for 30 seconds",
-      "Lick his neck slowly",
-      /* etc... */
-    ];
-    dares.intimacy.him = [
-      "Try missionary position for 1 minute",
-      "Try spooning position",
-      /* etc... */
-    ];
-    dares.intimacy.her = [
-      "Try missionary position for 1 minute",
-      "Try spooning position",
-      /* etc... */
-    ];
+    let phase = null, subcat = null;
+    const used = {
+      strip:{him:new Set(), her:new Set()},
+      foreplay:{him:new Set(), her:new Set()},
+      mutual:{him:new Set(), her:new Set()}
+    };
 
-    let selectedPhase = null;
-    let selectedSubcat = null;
-    let used = { strip: { him: new Set(), her: new Set() },
-                 foreplay: { him: new Set(), her: new Set() },
-                 intimacy: { him: new Set(), her: new Set() } };
-
-    function selectPhase(phase) {
-      selectedPhase = phase;
-      document.getElementById('controls').style.display = 'block';
-      document.getElementById('dare').innerText = `Phase: ${phase.toUpperCase()}, choose For Him or For Her.`;
+    function selectPhase(p) {
+      phase = p;
+      document.getElementById('controls').style.display='block';
+      document.getElementById('dare').innerText = `Phase: ${p.toUpperCase()}. Now choose For Him or For Her.`;
+      document.getElementById('btn-him').classList.remove('active');
+      document.getElementById('btn-her').classList.remove('active');
     }
 
-    function selectSubcat(subcat) {
-      selectedSubcat = subcat;
-      // highlight active subcat button
-      document.getElementById('btn-him').classList.toggle('active', subcat==='him');
-      document.getElementById('btn-her').classList.toggle('active', subcat==='her');
-      // reset used for this subcat if you want fresh start
-      used[selectedPhase][selectedSubcat] = new Set();
+    function selectSubcat(s) {
+      subcat = s;
+      document.getElementById('btn-him').classList.toggle('active', s==='him');
+      document.getElementById('btn-her').classList.toggle('active', s==='her');
+      used[phase][subcat].clear();
       nextDare();
     }
 
     function nextDare() {
-      if (!selectedPhase || !selectedSubcat) {
-        alert('Select a phase and who will perform!');
-        return;
-      }
-      const list = dares[selectedPhase][selectedSubcat];
-      const usedSet = used[selectedPhase][selectedSubcat];
+      if (!phase || !subcat) { alert('Select phase & For Him/Her!'); return; }
+      const list = dares[phase][subcat], usedSet = used[phase][subcat];
       if (usedSet.size >= list.length) {
-        document.getElementById('dare').innerText = 'All dares done! 🔁 Restart.';
+        document.getElementById('dare').innerText='All dares done! 🔁 Restart';
         return;
       }
       let idx;
-      do { idx = Math.floor(Math.random() * list.length); }
-      while (usedSet.has(idx));
+      do { idx = Math.floor(Math.random()*list.length); } while (usedSet.has(idx));
       usedSet.add(idx);
-      const label = selectedSubcat === 'him' ? 'For Him:' : 'For Her:';
+      const label = subcat==='him'?'For Him:':'For Her:';
       document.getElementById('dare').innerText = `${label} ${list[idx]}`;
     }
 
     function restart() {
-      selectedPhase = null;
-      selectedSubcat = null;
-      document.getElementById('phases').style.display = 'block';
-      document.getElementById('dare').innerText = 'Choose a phase and who’s up to begin';
-      document.getElementById('controls').style.display = 'none';
+      phase = subcat = null;
+      document.getElementById('controls').style.display='none';
+      document.getElementById('dare').innerText='Choose a phase and who’s up to begin';
       document.getElementById('btn-him').classList.remove('active');
       document.getElementById('btn-her').classList.remove('active');
     }
