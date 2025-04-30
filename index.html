@@ -13,16 +13,11 @@
     }
     h1 {
       color: #d63384;
+      margin-bottom: 20px;
     }
-    #dare {
-      font-size: 1.5rem;
-      margin: 40px 0;
-      color: #333;
-      min-height: 100px;
-    }
-    button {
-      padding: 12px 24px;
-      margin: 0 10px;
+    .btn {
+      padding: 12px 20px;
+      margin: 5px;
       font-size: 1rem;
       border-radius: 8px;
       border: none;
@@ -30,98 +25,228 @@
       color: #fff;
       cursor: pointer;
     }
+    .btn:hover {
+      background-color: #e05596;
+    }
+    #dare {
+      font-size: 1.5rem;
+      margin: 40px 0;
+      min-height: 80px;
+      color: #333;
+    }
+    #subcats, #controls {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
   <h1>Fantasy Dare Game 💋</h1>
-  <div id="dare">Click "Start" to begin</div>
-  <button onclick="nextDare()">➡️ Next</button>
-  <button onclick="restart()">🔁 Restart</button>
+
+  <!-- Phase selection -->
+  <div id="phases">
+    <button class="btn" onclick="selectPhase('strip')">Striptease</button>
+    <button class="btn" onclick="selectPhase('foreplay')">Foreplay</button>
+    <button class="btn" onclick="selectPhase('intimacy')">Intimacy</button>
+  </div>
+
+  <!-- Sub-category (For Him / For Her) -->
+  <div id="subcats" style="display:none;">
+    <button class="btn" onclick="selectSubcat('him')">For Him</button>
+    <button class="btn" onclick="selectSubcat('her')">For Her</button>
+  </div>
+
+  <!-- Dare display -->
+  <div id="dare">Choose a category above to begin</div>
+
+  <!-- Next / Restart controls -->
+  <div id="controls" style="display:none;">
+    <button class="btn" onclick="nextDare()">➡️ Next</button>
+    <button class="btn" onclick="restart()">🔁 Restart</button>
+  </div>
 
   <script>
-    const allDares = [
-      // --- Strip Dares ---
-      "Remove a piece using only one hand",
-      "Remove a piece while dancing to a song",
-      "Let your partner remove one item with their mouth",
-      "Pretend it’s your first time undressing for your partner",
-      "Do a slow countdown before removing a piece",
-      "Make eye contact and remove your shirt slowly",
-      "Remove a piece while turning around seductively",
-      "Take off clothing in the style of a movie scene",
-      "Remove something and toss it to your partner",
-      "Let your partner choose what you take off",
-      "Do a spin while removing a layer",
-      "Remove something while blindfolded",
-      "Say one compliment before taking something off",
-      "Remove something while doing a silly dance",
-      "Let your partner untie or unzip one piece",
-      "Act surprised as if it’s the first time",
-      "Whisper something naughty while undressing",
-
-      // --- Foreplay Dares ---
-      "Kiss passionately for 30 seconds",
-      "Lick their neck slowly",
-      "Give a sensual massage for 1 minute",
-      "Nibble their ear gently",
-      "Perform a slow striptease",
-      "Give a lap dance",
-      "Whisper your favorite fantasy",
-      "Caress their chest area for 1 minute",
-      "Kiss their inner thighs",
-      "Tease their body without touching privates",
-      "Blow softly near their private parts",
-      "Use only tongue for 1 minute",
-      "Suck on fingers suggestively",
-      "Blindfold and kiss everywhere",
-      "Do a slow grind for 30 seconds",
-
-      // --- Mutual Intimacy / Positions ---
-      "Look into each other's eyes for 30 seconds",
-      "Share your deepest desire",
-      "Try missionary position",
-      "Try spooning position",
-      "Try cowgirl position",
-      "Let your partner take full control",
-      "Explore each other’s bodies with fingertips",
-      "Touch each other without kissing for 2 minutes",
-      "Guide your partner’s hands",
-      "Sync your breath together",
-      "Moan each other’s name softly",
-      "Lie on top and feel heartbeats",
-      "Give 3 compliments before proceeding",
-      "Ask 'Can I continue?' playfully"
-    ];
-
-    let shuffled = [];
-    let currentIndex = 0;
-
-    function shuffleList(list) {
-      const newList = [...list];
-      for (let i = newList.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newList[i], newList[j]] = [newList[j], newList[i]];
+    // ---- Data ----
+    const dares = {
+      strip: {
+        him: [
+          "Remove a piece using only one hand",
+          "Remove a piece while dancing to a song",
+          "Let your partner remove one item with their mouth",
+          "Pretend it’s your first time undressing for your partner",
+          "Do a slow countdown before removing a piece",
+          "Make eye contact and remove your shirt slowly",
+          "Remove a piece while turning around seductively",
+          "Take off clothing in the style of a movie scene",
+          "Remove something and toss it to your partner",
+          "Let your partner choose what you take off",
+          "Do a spin while removing a layer",
+          "Remove something while blindfolded",
+          "Say one compliment before taking something off",
+          "Remove something while doing a silly dance",
+          "Let your partner untie or unzip one piece",
+          "Act surprised as if it’s the first time",
+          "Whisper something naughty while undressing",
+          "Tell a truth before removing one item",
+          "Remove something while turning slowly",
+          "Do it like you’re in a romantic movie"
+        ],
+        her: [
+          "Remove a piece using only one hand",
+          "Remove a piece while dancing to a song",
+          "Let your partner remove one item with their mouth",
+          "Pretend it’s your first time undressing for your partner",
+          "Do a slow countdown before removing a piece",
+          "Make eye contact and remove your bra slowly",
+          "Remove a piece while turning around seductively",
+          "Take off clothing in the style of a movie scene",
+          "Remove something and toss it to your partner",
+          "Let your partner choose what you take off",
+          "Do a spin while removing a layer",
+          "Remove something while blindfolded",
+          "Say one compliment before taking something off",
+          "Remove something while doing a silly dance",
+          "Let your partner untie or unzip one piece",
+          "Act surprised as if it’s the first time",
+          "Whisper something naughty while undressing",
+          "Tell a truth before removing one item",
+          "Remove something while turning slowly",
+          "Do it like you’re in a romantic movie"
+        ]
+      },
+      foreplay: {
+        him: [
+          "Kiss passionately for 30 seconds",
+          "Lick her neck slowly",
+          "Give a sensual massage for 1 minute",
+          "Nibble her ear gently",
+          "Perform a slow striptease",
+          "Give a lap dance",
+          "Whisper your favorite fantasy",
+          "Caress her chest area for 1 minute",
+          "Kiss her inner thighs",
+          "Tease her body without touching privates",
+          "Blow softly near her private parts",
+          "Use only tongue for 1 minute",
+          "Suck on her fingers suggestively",
+          "Blindfold and kiss everywhere",
+          "Do a slow grind for 30 seconds",
+          "Stroke her clit over underwear",
+          "Whisper a sexy countdown",
+          "Trail kisses from shoulder to hip",
+          "Bite her lower lip gently",
+          "Talk dirty for 30 seconds"
+        ],
+        her: [
+          "Kiss him passionately for 30 seconds",
+          "Lick his neck slowly",
+          "Give a sensual massage for 1 minute",
+          "Nibble his ear gently",
+          "Perform a slow striptease",
+          "Ride him slowly for 30 seconds",
+          "Whisper your favorite fantasy",
+          "Caress his chest area for 1 minute",
+          "Kiss his inner thighs",
+          "Tease him without touching his cock",
+          "Blow softly near his private parts",
+          "Use only tongue for 1 minute",
+          "Suck on his fingers suggestively",
+          "Blindfold and kiss everywhere",
+          "Do a slow grind for 30 seconds",
+          "Give him a handjob with massage oil",
+          "Whisper a sexy countdown",
+          "Trail kisses from shoulder to hip",
+          "Bite his lower lip gently",
+          "Talk dirty for 30 seconds"
+        ]
+      },
+      intimacy: {
+        him: [
+          "Try missionary position for 1 minute",
+          "Try spooning position",
+          "Try cowgirl position",
+          "Sync your breath together",
+          "Moan her name softly",
+          "Guide her hips slowly",
+          "Kiss her whole body",
+          "Hold her close and grind",
+          "Change positions after 1 minute",
+          "Whisper what you love about her body",
+          "Try doggy style gently",
+          "Take turns leading movement",
+          "Keep eye contact while moving",
+          "Pause and kiss mid-motion",
+          "Tell her a sexy compliment"
+        ],
+        her: [
+          "Try missionary position for 1 minute",
+          "Try spooning position",
+          "Try cowgirl position",
+          "Sync your breath together",
+          "Moan his name softly",
+          "Guide his hips slowly",
+          "Kiss his whole body",
+          "Hold him close and grind",
+          "Change positions after 1 minute",
+          "Whisper what you love about his body",
+          "Try him from behind gently",
+          "Take turns leading movement",
+          "Keep eye contact while moving",
+          "Pause and kiss mid-motion",
+          "Tell him a sexy compliment"
+        ]
       }
-      return newList;
+    };
+
+    let currentList = [];
+    let usedIndices = new Set();
+
+    function selectPhase(phase) {
+      window.selectedPhase = phase;
+      document.getElementById("phases").style.display = "none";
+      document.getElementById("subcats").style.display = "block";
+      document.getElementById("dare").innerText = `Selected: ${phase[0].toUpperCase() + phase.slice(1)} — now choose For Him or For Her`;
+      document.getElementById("controls").style.display = "none";
     }
 
-    function nextDare() {
-      if (currentIndex >= shuffled.length) {
-        document.getElementById("dare").innerText = "All dares complete! 🔁 Restart to play again.";
-        return;
-      }
-      document.getElementById("dare").innerText = shuffled[currentIndex];
-      currentIndex++;
-    }
-
-    function restart() {
-      shuffled = shuffleList(allDares);
-      currentIndex = 0;
+    function selectSubcat(subcat) {
+      const phase = window.selectedPhase;
+      currentList = [...dares[phase][subcat]];
+      usedIndices.clear();
+      shuffle(currentList);
+      document.getElementById("subcats").style.display = "none";
+      document.getElementById("controls").style.display = "block";
       nextDare();
     }
 
-    // Initial shuffle
-    shuffled = shuffleList(allDares);
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    function nextDare() {
+      if (usedIndices.size >= currentList.length) {
+        document.getElementById("dare").innerText = "All dares done! 🔁 Restart to play again.";
+        return;
+      }
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * currentList.length);
+      } while (usedIndices.has(idx));
+      usedIndices.add(idx);
+      document.getElementById("dare").innerText = currentList[idx];
+    }
+
+    function restart() {
+      // reset UI
+      document.getElementById("phases").style.display = "block";
+      document.getElementById("subcats").style.display = "none";
+      document.getElementById("controls").style.display = "none";
+      document.getElementById("dare").innerText = "Choose a category above to begin";
+      currentList = [];
+      usedIndices.clear();
+    }
   </script>
 </body>
 </html>
