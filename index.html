@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fantasy Dare Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffeff3;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      color: #d6336c;
+    }
+    button {
+      margin: 10px;
+      padding: 15px 25px;
+      background-color: #d6336c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #c02659;
+    }
+    .dare-box {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff0f5;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fantasy Dare Game</h1>
+  <div>
+    <button onclick="showDare('him')">For Him</button>
+    <button onclick="showDare('her')">For Her</button>
+    <button onclick="showDare('mutual')">Mutual</button>
+  </div>
+  <div class="dare-box" id="dareBox">Click a button to get a dare!</div>
+
+  <script>
+    const dares = {
+      him: [
+        "Get a blowjob for 1 minute.",
+        "She must rub your inner thigh while whispering naughty things.",
+        "Sit back and receive a slow striptease.",
+        "Get your nipples teased with ice.",
+        "She strokes you gently for 2 minutes — no climax allowed."
+      ],
+      her: [
+        "Receive a passionate kiss for 2 minutes.",
+        "He must lick and tease your neck and ear.",
+        "Get your inner thighs kissed slowly.",
+        "He must rub your clit over your underwear.",
+        "Let him use his fingers to drive you crazy — no climax allowed."
+      ],
+      mutual: [
+        "Do a slow 69 position for 2 minutes.",
+        "Kiss each other while rubbing against each other.",
+        "Use only your tongues for the next kiss.",
+        "Exchange 3 favorite turn-ons.",
+        "Do a body-to-body massage for 3 minutes."
+      ]
+    };
+
+    function showDare(type) {
+      const list = dares[type];
+      const randomDare = list[Math.floor(Math.random() * list.length)];
+      document.getElementById("dareBox").textContent = randomDare;
+    }
+  </script>
+</body>
+</html>
