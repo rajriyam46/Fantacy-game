@@ -1,41 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fantasy Dare Game</title>
-  <style>
-    body { font-family: Arial, sans-serif; background-color: #ffeff3; color: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-    h1 { color: #d6336c; }
-    button { margin: 5px; padding: 10px 20px; background-color: #d6336c; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; }
-    button:hover { background-color: #c02659; }
-    .dare-box { margin-top: 20px; padding: 20px; background-color: #fff0f5; border-radius: 12px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 80%; max-width: 400px; text-align: center; font-size: 16px; }
-  </style>
-</head>
-<body>
-  <h1>Fantasy Dare Game</h1>
-  <div>
-    <button onclick="showDare('him')">For Him</button>
-    <button onclick="showDare('her')">For Her</button>
-    <button onclick="showDare('mutual')">Mutual</button>
-  </div>
-  <div class="dare-box" id="dareBox">Click a button to get a dare!</div>
-  <script>
-    const originalDares = {'him': ['Lick her slowly from neck to thighs', 'Hold her wrists above her head and tease her', 'Spread her legs and blow warm air between them', "Eat her out until she can't take anymore", 'Pin her down and make her moan your name', 'Suck her nipples with alternating pressure', 'Slap her ass and then kiss it better', 'Undress her with your mouth', 'Tie her legs apart and taste her slowly', 'Use your tongue in circular motion on her clit', 'Edge her three times before letting her finish', 'Talk dirty while fingering her slowly', 'Lick honey or syrup off her breasts', 'Bite her inner thighs softly', 'Make her ride your tongue', 'Gently choke her while you kiss her hard (consensual only)', 'Slide your fingers inside her while whispering fantasies', 'Tell her exactly what you’re going to do before doing it', 'Tease her over her panties without removing them', 'Kiss her entire body except between her legs', 'Tie her ankles and make her ask before touching', 'Make her scream by using only your mouth', 'Pinch her nipples while stimulating her with your tongue', 'Slide your hand under her clothes in public (if safe/legal)', 'Force her to keep eye contact while pleasing her', 'Use a toy on her while you watch', 'Kiss and suck her toes slowly', 'Pull her hair while you go down on her', 'Kiss her while your hand plays between her legs', 'Hold her from behind and grind slowly into her'], 'her': ['Deep throat him slowly while holding eye contact', 'Ride him with slow, deep strokes', 'Tie him up and tease without letting him touch you', 'Kiss down his torso and stop just above his shaft', 'Lick the tip only — no more — for 1 minute', 'Suck his balls gently while stroking him', 'Sit on his face and let him go wild', 'Make him watch you strip slowly', 'Touch yourself in front of him and don’t let him join', 'Use only your mouth to make him come close — then stop', 'Moan his name in his ear while grinding', 'Drip candle wax (safely) onto his chest', 'Bite his neck hard while riding him', 'Kiss his shaft from base to tip', 'Use your bra/panties to tease him', 'Talk dirty in detail about your last fantasy', 'Run your tongue over his body like a snake', 'Tell him what to do — and punish him if he disobeys', 'Lick and bite his earlobe while stroking him', 'Stroke his shaft with your feet', 'Sit on his lap, no panties, and grind slowly', 'Kiss his inner thighs without touching his cock', 'Lick whipped cream off his shaft', 'Spit on it and rub it slowly with your hand', 'Play with him under the table during dinner', 'Send him a live video of you touching yourself', 'Wake him up with oral', 'Write your name on his chest with your tongue', 'Say the dirtiest thing you can imagine while riding', 'Let him come on your body wherever he chooses'], 'mutual': ['Do 69 for 5 minutes', 'Shower together and wash each other everywhere', 'Lick each other in sync — no hands allowed', 'Have sex in front of a mirror', 'Roleplay your hottest taboo fantasy', 'Try mutual masturbation while watching each other', 'Tie each other up — one round each', 'Do it in a new room/place in the house', 'Watch porn together and act it out', 'Try a new position neither of you has done', 'Moan as loud as you can — then louder', 'Compete who can make the other come faster', 'Record yourselves and watch it later together', 'Eat food off each other naked', 'Go commando in public and tease each other', 'Switch dominant/submissive roles', 'Take turns teasing each other for 2 minutes', 'Do it with the lights on, mirrors around', 'Act out a scenario like boss/employee or stranger/stranger', 'Pleasure each other at the same time with toys', 'Take a sexy selfie together — then one for each other', 'Describe your wildest dream and then do it', 'Strip each other one item at a time per minute', 'Use hot and cold items to tease each other', 'Dance naked together until one of you gives in', 'Make a list of 3 fantasies and pick one to try now', 'Do it somewhere risky (safe & consensual only)', 'Lick each other’s entire body from head to toe', 'Keep your hands behind your back while pleasing each other', 'Edge each other — neither can finish until both are begging']};
-    let availableDares = {'him': ['Lick her slowly from neck to thighs', 'Hold her wrists above her head and tease her', 'Spread her legs and blow warm air between them', "Eat her out until she can't take anymore", 'Pin her down and make her moan your name', 'Suck her nipples with alternating pressure', 'Slap her ass and then kiss it better', 'Undress her with your mouth', 'Tie her legs apart and taste her slowly', 'Use your tongue in circular motion on her clit', 'Edge her three times before letting her finish', 'Talk dirty while fingering her slowly', 'Lick honey or syrup off her breasts', 'Bite her inner thighs softly', 'Make her ride your tongue', 'Gently choke her while you kiss her hard (consensual only)', 'Slide your fingers inside her while whispering fantasies', 'Tell her exactly what you’re going to do before doing it', 'Tease her over her panties without removing them', 'Kiss her entire body except between her legs', 'Tie her ankles and make her ask before touching', 'Make her scream by using only your mouth', 'Pinch her nipples while stimulating her with your tongue', 'Slide your hand under her clothes in public (if safe/legal)', 'Force her to keep eye contact while pleasing her', 'Use a toy on her while you watch', 'Kiss and suck her toes slowly', 'Pull her hair while you go down on her', 'Kiss her while your hand plays between her legs', 'Hold her from behind and grind slowly into her'], 'her': ['Deep throat him slowly while holding eye contact', 'Ride him with slow, deep strokes', 'Tie him up and tease without letting him touch you', 'Kiss down his torso and stop just above his shaft', 'Lick the tip only — no more — for 1 minute', 'Suck his balls gently while stroking him', 'Sit on his face and let him go wild', 'Make him watch you strip slowly', 'Touch yourself in front of him and don’t let him join', 'Use only your mouth to make him come close — then stop', 'Moan his name in his ear while grinding', 'Drip candle wax (safely) onto his chest', 'Bite his neck hard while riding him', 'Kiss his shaft from base to tip', 'Use your bra/panties to tease him', 'Talk dirty in detail about your last fantasy', 'Run your tongue over his body like a snake', 'Tell him what to do — and punish him if he disobeys', 'Lick and bite his earlobe while stroking him', 'Stroke his shaft with your feet', 'Sit on his lap, no panties, and grind slowly', 'Kiss his inner thighs without touching his cock', 'Lick whipped cream off his shaft', 'Spit on it and rub it slowly with your hand', 'Play with him under the table during dinner', 'Send him a live video of you touching yourself', 'Wake him up with oral', 'Write your name on his chest with your tongue', 'Say the dirtiest thing you can imagine while riding', 'Let him come on your body wherever he chooses'], 'mutual': ['Do 69 for 5 minutes', 'Shower together and wash each other everywhere', 'Lick each other in sync — no hands allowed', 'Have sex in front of a mirror', 'Roleplay your hottest taboo fantasy', 'Try mutual masturbation while watching each other', 'Tie each other up — one round each', 'Do it in a new room/place in the house', 'Watch porn together and act it out', 'Try a new position neither of you has done', 'Moan as loud as you can — then louder', 'Compete who can make the other come faster', 'Record yourselves and watch it later together', 'Eat food off each other naked', 'Go commando in public and tease each other', 'Switch dominant/submissive roles', 'Take turns teasing each other for 2 minutes', 'Do it with the lights on, mirrors around', 'Act out a scenario like boss/employee or stranger/stranger', 'Pleasure each other at the same time with toys', 'Take a sexy selfie together — then one for each other', 'Describe your wildest dream and then do it', 'Strip each other one item at a time per minute', 'Use hot and cold items to tease each other', 'Dance naked together until one of you gives in', 'Make a list of 3 fantasies and pick one to try now', 'Do it somewhere risky (safe & consensual only)', 'Lick each other’s entire body from head to toe', 'Keep your hands behind your back while pleasing each other', 'Edge each other — neither can finish until both are begging']};
-    
-    function showDare(type) {
-      if (!availableDares[type] || availableDares[type].length === 0) {
-        document.getElementById("dareBox").textContent = "No more dares in this category!";
-        return;
-      }
-      const list = availableDares[type];
-      const idx = Math.floor(Math.random() * list.length);
-      const dare = list[idx];
-      // Remove the selected dare so it doesn't repeat
-      availableDares[type].splice(idx, 1);
-      document.getElementById("dareBox").textContent = dare;
+import { useState, useEffect } from "react";
+
+const fullList = [
+  // --- Strip Dares ---
+ "Remove a piece using only one hand",
+  "Remove a piece while dancing to a song",
+  "Let your partner remove one item with their mouth",
+  "Pretend it’s your first time undressing for your partner",
+  "Do a slow countdown before removing a piece",
+  "Make eye contact and remove your shirt slowly",
+  "Remove a piece while turning around seductively",
+  "Take off clothing in the style of a movie scene",
+  "Remove something and toss it to your partner",
+  "Let your partner choose what you take off",
+  "Do a spin while removing a layer",
+  "Remove an item and describe your favorite memory while wearing it",
+  "Remove a piece in slow motion while narrating like a sportscaster",
+  "Pretend you're modeling and remove one item on a catwalk",
+  "Remove something while blindfolded",
+  "Let your partner untie or unzip one piece",
+  "Take off clothing while holding your breath",
+  "Use a countdown (3...2...1) before revealing the removed item",
+  "Take off one item with eyes closed and guess what’s left",
+  "Remove something while pretending to be a shy first-timer"
+
+  // --- Foreplay Dares ---
+  "Kiss passionately for 30 seconds",
+  "Lick neck slowly",
+  "Give a sensual massage for 1 minute",
+  "Nibble their ear gently",
+  "Perform a slow striptease",
+  "Give a lap dance",
+  "Whisper your favorite fantasy",
+  "Caress chest area for 1 minute",
+  "Lick navel in circles",
+  "Rub partner’s thighs slowly",
+  "Kiss inner thighs",
+  "Touch and tease but don’t go all the way",
+  "Blow softly near their private parts",
+  "Try a 69 position (for a few seconds if new)",
+  "Give a blowjob",
+  "Give a hand job",
+  "Let partner rub your penis slowly",
+  "Rub her clit gently",
+  "Kiss nipples gently",
+  "Blindfold and kiss everywhere",
+  "Suck on fingers suggestively",
+  "Do a sexy countdown before touching",
+  "Use only tongue for 1 minute",
+  "Do a slow grind for 30 seconds",
+
+  // --- Mutual Intimacy ---
+  "Look into each other's eyes for 30 seconds",
+  "Share one deepest desire",
+  "Try missionary position",
+  "Try spooning position",
+  "Try cowgirl position",
+  "Do soft kisses all over body",
+  "Let partner take complete control",
+  "Both get fully undressed together",
+  "Hug without saying a word for 1 minute",
+  "Explore each other’s bodies with fingertips",
+  "Touch each other without kissing for 2 minutes",
+  "Lie on top and feel heartbeats",
+  "Moan each other’s name softly",
+  "Roleplay silently with actions",
+  "Give 3 compliments before proceeding",
+  "Ask 'Can I continue?' playfully",
+  "Sync your breath together",
+  "Guide your partner’s hands",
+];
+
+export default function Home() {
+  const [shuffled, setShuffled] = useState([]);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const newList = [...fullList];
+    for (let i = newList.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newList[i], newList[j]] = [newList[j], newList[i]];
     }
-  </script>
-</body>
-</html>
+    setShuffled(newList);
+    setIndex(0);
+  }, []);
+
+  const nextAction = () => {
+    if (index < shuffled.length - 1) {
+      setIndex(index + 1);
+    }
+  };
+
+  const reset = () => {
+    const reshuffled = [...fullList];
+    for (let i = reshuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [reshuffled[i], reshuffled[j]] = [reshuffled[j], reshuffled[i]];
+    }
+    setShuffled(reshuffled);
+    setIndex(0);
+  };
+
+  return (
+    <div style={{ fontFamily: "sans-serif", textAlign: "center", padding: "2rem" }}>
+      <h1>Fantasy Dare Game 💋</h1>
+      <div style={{
+        border: "2px solid #f06",
+        borderRadius: "10px",
+        padding: "2rem",
+        margin: "2rem auto",
+        maxWidth: "500px",
+        backgroundColor: "#fff0f5",
+        fontSize: "1.5rem"
+      }}>
+        {shuffled[index]}
+      </div>
+      <div style={{ marginTop: "1rem" }}>
+        <button onClick={nextAction} style={btnStyle}>Next ➡️</button>
+        <button onClick={reset} style={btnStyle}>🔁 Restart</button>
+      </div>
+    </div>
+  );
+}
+
+const btnStyle = {
+  padding: "10px 20px",
+  margin: "0 10px",
+  fontSize: "1rem",
+  borderRadius: "8px",
+  border: "none",
+  background: "#ff69b4",
+  color: "#fff",
+  cursor: "pointer"
+};
