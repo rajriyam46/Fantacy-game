@@ -34,7 +34,7 @@
       min-height: 80px;
       color: #333;
     }
-    #subcats, #controls {
+    #phases, #controls {
       margin-top: 20px;
     }
   </style>
@@ -49,8 +49,8 @@
     <button class="btn" onclick="selectPhase('intimacy')">Intimacy</button>
   </div>
 
-  <!-- Sub-category (For Him / For Her) -->
-  <div id="subcats" style="display:none;">
+  <!-- Sub-category buttons always visible -->
+  <div id="subcats">
     <button class="btn" onclick="selectSubcat('him')">For Him</button>
     <button class="btn" onclick="selectSubcat('her')">For Her</button>
   </div>
@@ -203,9 +203,8 @@
     function selectPhase(phase) {
       window.selectedPhase = phase;
       document.getElementById("phases").style.display = "none";
-      document.getElementById("subcats").style.display = "block";
-      document.getElementById("dare").innerText = `Selected: ${phase[0].toUpperCase() + phase.slice(1)} — now choose For Him or For Her`;
-      document.getElementById("controls").style.display = "none";
+      document.getElementById("controls").style.display = "block";
+      nextDare();
     }
 
     function selectSubcat(subcat) {
@@ -213,8 +212,6 @@
       currentList = [...dares[phase][subcat]];
       usedIndices.clear();
       shuffle(currentList);
-      document.getElementById("subcats").style.display = "none";
-      document.getElementById("controls").style.display = "block";
       nextDare();
     }
 
@@ -241,7 +238,6 @@
     function restart() {
       // reset UI
       document.getElementById("phases").style.display = "block";
-      document.getElementById("subcats").style.display = "none";
       document.getElementById("controls").style.display = "none";
       document.getElementById("dare").innerText = "Choose a category above to begin";
       currentList = [];
